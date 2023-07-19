@@ -22,11 +22,11 @@
         <!-- Search Sidebar -->
         <div class="row">
             <div class="col-2">
-                <div class="col-12 searchSection">
+                <form id="submitForm" class="col-12 searchSection">
                     <h2 class="col-12 h2">Search for a City:</h2>
                     <input type="text" class="col-12 input" id="query">
                     <button class="col-12 search-button" id="searchBtn">Search</button>
-                </div>
+                </form>
                 <div class="col-12 history">
                     <h2 class="search-history">Search History:</h2>
                     
@@ -36,51 +36,51 @@
             <!-- Main Weather Card -->
             <div class="col-10">
                 <div class="col-12 main-weather">
-                    <h3 id="current-city-date">City (CurrentDate) <img src="" alt="icon"></h3>
-                    <p id="current-temp">Temp: </p>
-                    <p id="current-wind">Wind: </p>
-                    <p id="current-humidity">Humidity: </p>
+                    <h3 id="currentCityDate"><img id="currentIcon" src="" alt="icon"></h3>
+                    <p>Temp: <span id="currentTemp"></span></p>
+                    <p>Wind: <span id="currentWind"></span></p>
+                    <p>Humidity: <span id="currentHumidity"></span></p>
                 </div>
                 <!-- Day 1 -->
                 <h3 class="col-12">5-Day Forecast:</h3>
                 <div class="col-2 five-day" id="day1">
-                    <h5 id="future-date1">Date</h5>
-                    <img src="" alt="icon">
-                    <p id="future-temp1"></p>
-                    <p id="future-wind1"></p>
-                    <p id="future-humidity1"></p>
+                    <h5 id="futureDate1">Date</h5>
+                    <img id ="futureIcon1" src="" alt="icon">
+                    <p id="futureTemp1"></p>
+                    <p id="futureWind1"></p>
+                    <p id="futureHumidity1"></p>
                 </div>
                 <!-- Day 2 -->
                 <div class="col-2 five-day" id="day2">
-                    <h5 id="future-date2">Date</h5>
-                    <img src="" alt="icon">
-                    <p id="future-temp2"></p>
-                    <p id="future-wind2"></p>
-                    <p id="future-humidity2"></p>
+                    <h5 id="futureDate2">Date</h5>
+                    <img id ="futureIcon2" src="" alt="icon">
+                    <p id="futureTemp2"></p>
+                    <p id="futureWind2"></p>
+                    <p id="futureHumidity2"></p>
                 </div>
                 <!-- Day 3 -->
                 <div class="col-2 five-day" id="day3">
-                    <h5 id="future-date3">Date</h5>
-                    <img src="" alt="icon">
-                    <p id="future-temp3"></p>
-                    <p id="future-wind3"></p>
-                    <p id="future-humidity3"></p>
+                    <h5 id="futureDate3">Date</h5>
+                    <img id ="futureIcon3" src="" alt="icon">
+                    <p id="futureTemp3"></p>
+                    <p id="futureWind3"></p>
+                    <p id="futureHumidity3"></p>
                 </div>
                 <!-- Day 4 -->
                 <div class="col-2 five-day" id="day4">
-                    <h5 id="future-date4">Date</h5>
-                    <img src="" alt="icon">
-                    <p id="future-temp4"></p>
-                    <p id="future-wind4"></p>
-                    <p id="future-humidity4"></p>
+                    <h5 id="futureDate4">Date</h5>
+                    <img id ="futureIcon4" src="" alt="icon">
+                    <p id="futureTemp4"></p>
+                    <p id="futureWind4"></p>
+                    <p id="futureHumidity4"></p>
                 </div>
                 <!-- Day 5 -->
                 <div class="col-2 five-day" id="day5">
-                    <h5 id="future-date5">Date</h5>
-                    <img src="" alt="icon">
-                    <p id="future-temp5"></p>
-                    <p id="future-wind5"></p>
-                    <p id="future-humidity5"></p>
+                    <h5 id="futureDate5">Date</h5>
+                    <img id ="futureIcon5" src="" alt="icon">
+                    <p id="futureTemp5"></p>
+                    <p id="futureWind5"></p>
+                    <p id="futureHumidity5"></p>
                 </div>
             </div>
         </div>
