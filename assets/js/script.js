@@ -47,6 +47,7 @@ function getForecast(lat, lon) {
 // SHOWS ARRAY OF FETCHED DATA IN CONSOLE
   .then(function (data) {
     console.log(data)
+    updateForecast(data);
    });
 };
 
@@ -106,6 +107,23 @@ function updateCurrentWeather(currentWeather) {
   wind.textContent = currentWeather.wind.speed;
   var humidity = document.getElementById("currentHumidity");
   humidity.textContent = currentWeather.main.humidity;
-  
+}
+
+function updateForecast(forecast) {
+  var cards = document.getElementById("cards");
+  cards.innerHTML = '';
+  for (var i = 2; i < forecast.list.length; i+=8) {
+    console.log(forecast.list[i]);
+    var outerDiv = document.createElement('div')
+    outerDiv.classList.add('col-2', 'five-day')
+    outerDiv.innerHTML = `
+    <h5>${new Date(forecast.list[i].dt * 1000).toLocaleDateString()}</h5>
+    <img src="${`https://openweathermap.org/img/wn/${forecast.list[i].weather[0].icon}@2x.png`}" alt="icon">
+    <p>Temp: ${forecast.list[i].main.temp}</p>
+    <p>Wind: ${forecast.list[i].wind.speed}</p>
+    <p>Humidity: ${forecast.list[i].main.humidity}</p>
+    `
+    cards.append(outerDiv);
+  }
 }
 
