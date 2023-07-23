@@ -15,7 +15,7 @@ formEl.addEventListener('submit', function (event) {
 //FUNCTION TO GET COORDINATES (LAT/LON) FROM API CALL
 function getLatLon(city) {
 
-  var QueryUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=&appid=" + apiKey;
+  var QueryUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=&appid=" + apiKey;
 
   fetch(QueryUrl)
     .then(function (response) {
@@ -34,7 +34,7 @@ function getLatLon(city) {
 //FUNCTION TO GET THE FORECAST DATA (CALLED IN 'getLatLon' FUNCTION)
 function getForecast(lat, lon) {
 
-  var url = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
+  var url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
 
   fetch(url)
     .then(function (response) {
