@@ -4,79 +4,72 @@ var apiKey = "0e584d18f4751753861bc60159e5582b";
 // FORM ELEMENT STORED IN VARIABLE
 var formEl = document.getElementById('submitForm');
 
-// EVENT-LISTENER ON FORM ELEMENT WITH FUNCTION TO GET API DATA
-formEl.addEventListener('submit', function(event) {
-
-// PREVENTS WEBPAGE FROM RELOADING
-  event.preventDefault();
-
-// VARIABLE STORING VALUE FROM HTML USER INPUT ELEMENT
+// EVENT-LISTENER ON FORM ELEMENT CALLING FUNCTION TO GET API DATA
+formEl.addEventListener('submit', function (event) {
   var city = document.getElementById('query').value;
-
-// API FETCH VARIABLE WITH OPTIONS
-var QueryUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=&appid=" + apiKey;
-
- fetch(QueryUrl)
-     .then(function (response) {
-       if (!response.ok) {
-         throw response.json();
-       }
-       console.log(response);
-       return response.json();
-      })
-// SHOWS ARRAY OF FETCHED DATA IN CONSOLE
-     .then(function (data) {
-       getForecast(data[0].lat, data[0].lon);
-       getCurrent(data[0].lat, data[0].lon);
-      });
+  event.preventDefault();
+  getLatLon(city)
+  
 });
 
+//FUNCTION TO GET COORDINATES (LAT/LON) FROM API CALL
+function getLatLon(city) {
+
+  var QueryUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=&appid=" + apiKey;
+
+  fetch(QueryUrl)
+    .then(function (response) {
+      if (!response.ok) {
+        throw response.json();
+      }
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      getForecast(data[0].lat, data[0].lon);
+      getCurrent(data[0].lat, data[0].lon);
+    });
+}
+
+//FUNCTION TO GET THE FORECAST DATA (CALLED IN 'getLatLon' FUNCTION)
 function getForecast(lat, lon) {
-  console.log(lat);
-  console.log(lon);
+
   var url = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
 
   fetch(url)
-  .then(function (response) {
-    if (!response.ok) {
-      throw response.json();
-    }
-    console.log(response);
-    return response.json();
-   })
-// SHOWS ARRAY OF FETCHED DATA IN CONSOLE
-  .then(function (data) {
-    console.log(data)
-    updateForecast(data);
-   });
+    .then(function (response) {
+      if (!response.ok) {
+        throw response.json();
+      }
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data)
+      updateForecast(data);
+    });
 };
 
+//FUNCTION TO GET THE CURRENT WEATHER DATA (CALLED IN 'getLatLon' FUNCTION)
 function getCurrent(lat, lon) {
   var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
 
   fetch(url)
-  .then(function (response) {
-    if (!response.ok) {
-      throw response.json();
-    }
-    console.log(response);
-    return response.json();
-   })
-// SHOWS ARRAY OF FETCHED DATA IN CONSOLE
-  .then(function (data) {
-    console.log(data);
-    console.log(data.weather[0].icon);
-    console.log(data.main.temp);
-    console.log(data.wind.speed);
-    console.log(data.main.humidity);
-    console.log(new Date(data.dt * 1000).toLocaleDateString());
-    updateCurrentWeather(data);
-    addToHistory(data.name);
-   });
+    .then(function (response) {
+      if (!response.ok) {
+        throw response.json();
+      }
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      updateCurrentWeather(data);
+      addToHistory(data.name);
+    });
 };
 
+//FUNCTION TO ADD CITY NAMES TO LOCAL STORAGE
 function addToHistory(name) {
-  // CREATE LOCAL STORAGE
   const storageData = JSON.parse(localStorage.getItem("searchHistory"));
   if (!storageData || storageData.length === 0) {
     localStorage.setItem("searchHistory", JSON.stringify([name]))
@@ -84,8 +77,8 @@ function addToHistory(name) {
     storageData.push(name);
     localStorage.setItem("searchHistory", JSON.stringify(storageData))
   } else {
-    var filteredData = storageData.filter(function(entry){
-           return entry !== name
+    var filteredData = storageData.filter(function (entry) {
+      return entry !== name
     })
     console.log(filteredData)
     filteredData.push(name);
@@ -94,8 +87,10 @@ function addToHistory(name) {
   displaySearchHistory();
 };
 
+//CALLS GET FORECAST FUNCTION ON PAGE LOAD
 displaySearchHistory();
 
+//FUNCTION TO CREATE THE ELEMENTS TO DISPLAY THE SEARCH HISTORY
 function displaySearchHistory() {
   const storageData = JSON.parse(localStorage.getItem("searchHistory"));
   var searchHistory = document.getElementById('history');
@@ -103,12 +98,19 @@ function displaySearchHistory() {
   for (var i = 0; i < storageData.length; i++) {
     var button = document.createElement('button');
     button.textContent = storageData[i];
-    searchHistory.append(button);
-  }
-}
+    searchHistory.prepend(button);
+    button.addEventListener('click', function (e) {
 
+      console.log('clicked on', e.target.textContent);
+      getLatLon(e.target.textContent);
+    })
+  }
+};
+
+//FUNCTION TO CREATE THE ELEMENTS FOR THE CURRENT WEATHER AND DISPLAY THE DATA
+//(CALLED IN 'getCurrent' FUNCTION)
 function updateCurrentWeather(currentWeather) {
-  
+
   var city = document.getElementById("currentCity");
   city.textContent = currentWeather.name;
   var date = document.getElementById("currentDate");
@@ -121,12 +123,14 @@ function updateCurrentWeather(currentWeather) {
   wind.textContent = currentWeather.wind.speed;
   var humidity = document.getElementById("currentHumidity");
   humidity.textContent = currentWeather.main.humidity;
-}
+};
 
+//FUNCTION TO CREATE THE ELEMENTS FOR THE 5 DAY FORECAST AND DISPLAY THE DATA
+//(CALLED IN 'getForecast' FUNCTION)
 function updateForecast(forecast) {
   var cards = document.getElementById("cards");
   cards.innerHTML = '';
-  for (var i = 2; i < forecast.list.length; i+=8) {
+  for (var i = 2; i < forecast.list.length; i += 8) {
     console.log(forecast.list[i]);
     var outerDiv = document.createElement('div')
     outerDiv.classList.add('col-2', 'five-day')
@@ -139,5 +143,5 @@ function updateForecast(forecast) {
     `
     cards.append(outerDiv);
   }
-}
+};
 
