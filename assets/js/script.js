@@ -145,13 +145,3 @@ function updateForecast(forecast) {
     cards.append(outerDiv);
   }
 };
-
-//FUNCTION TO CLEAR LOCAL STORAGE AND RELOAD THE PAGE
-var clearBtn = document.getElementById('clear');
-function clearHistory() {
-  localStorage.clear();
-  window.location.reload();
-}
-
-//EVENT LISTENER TO RUN 'clearHistory' FUNCTION ON CLICK
-clearBtn.addEventListener('click', clearHistory);
