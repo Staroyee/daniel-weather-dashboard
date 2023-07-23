@@ -64,6 +64,12 @@ function getCurrent(lat, lon) {
 // SHOWS ARRAY OF FETCHED DATA IN CONSOLE
   .then(function (data) {
     console.log(data);
+    console.log(data.weather[0].icon);
+    console.log(data.main.temp);
+    console.log(data.wind.speed);
+    console.log(data.main.humidity);
+    console.log(new Date(data.dt * 1000).toLocaleDateString());
+    updateCurrentWeather(data);
     addToHistory(data.name);
    });
 };
@@ -83,6 +89,23 @@ function addToHistory(name) {
     console.log(filteredData)
     filteredData.push(name);
     localStorage.setItem("searchHistory", JSON.stringify(filteredData));
-    
   }
+};
+
+function updateCurrentWeather(currentWeather) {
+  
+  var city = document.getElementById("currentCity");
+  city.textContent = currentWeather.name;
+  var date = document.getElementById("currentDate");
+  date.textContent = new Date(currentWeather.dt * 1000).toLocaleDateString();
+  var icon = document.getElementById("currentIcon");
+  icon.src = `https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`;
+  var temp = document.getElementById("currentTemp");
+  temp.textContent = currentWeather.main.temp;
+  var wind = document.getElementById("currentWind");
+  wind.textContent = currentWeather.wind.speed;
+  var humidity = document.getElementById("currentHumidity");
+  humidity.textContent = currentWeather.main.humidity;
+  
 }
+
