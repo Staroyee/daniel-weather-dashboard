@@ -91,7 +91,21 @@ function addToHistory(name) {
     filteredData.push(name);
     localStorage.setItem("searchHistory", JSON.stringify(filteredData));
   }
+  displaySearchHistory();
 };
+
+displaySearchHistory();
+
+function displaySearchHistory() {
+  const storageData = JSON.parse(localStorage.getItem("searchHistory"));
+  var searchHistory = document.getElementById('history');
+  searchHistory.innerHTML = '';
+  for (var i = 0; i < storageData.length; i++) {
+    var button = document.createElement('button');
+    button.textContent = storageData[i];
+    searchHistory.append(button);
+  }
+}
 
 function updateCurrentWeather(currentWeather) {
   
