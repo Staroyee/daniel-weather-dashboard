@@ -26,6 +26,43 @@ var QueryUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limi
       })
 // SHOWS ARRAY OF FETCHED DATA IN CONSOLE
      .then(function (data) {
-       console.log(data);
+       getForecast(data[0].lat, data[0].lon);
+       getCurrent(data[0].lat, data[0].lon);
       });
 });
+
+function getForecast(lat, lon) {
+  console.log(lat);
+  console.log(lon);
+  var url = "http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
+
+  fetch(url)
+  .then(function (response) {
+    if (!response.ok) {
+      throw response.json();
+    }
+    console.log(response);
+    return response.json();
+   })
+// SHOWS ARRAY OF FETCHED DATA IN CONSOLE
+  .then(function (data) {
+    console.log(data)
+   });
+}
+
+function getCurrent(lat, lon) {
+  var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
+
+  fetch(url)
+  .then(function (response) {
+    if (!response.ok) {
+      throw response.json();
+    }
+    console.log(response);
+    return response.json();
+   })
+// SHOWS ARRAY OF FETCHED DATA IN CONSOLE
+  .then(function (data) {
+    console.log(data)
+   });
+}
