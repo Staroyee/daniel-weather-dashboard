@@ -9,7 +9,7 @@ formEl.addEventListener('submit', function (event) {
   var city = document.getElementById('query').value;
   event.preventDefault();
   getLatLon(city)
-  
+
 });
 
 //FUNCTION TO GET COORDINATES (LAT/LON) FROM API CALL
@@ -98,6 +98,7 @@ function displaySearchHistory() {
   for (var i = 0; i < storageData.length; i++) {
     var button = document.createElement('button');
     button.textContent = storageData[i];
+    button.setAttribute("class", "col-12 historyButton")
     searchHistory.prepend(button);
     button.addEventListener('click', function (e) {
 
@@ -145,3 +146,12 @@ function updateForecast(forecast) {
   }
 };
 
+//FUNCTION TO CLEAR LOCAL STORAGE AND RELOAD THE PAGE
+var clearBtn = document.getElementById('clear');
+function clearHistory() {
+  localStorage.clear();
+  window.location.reload();
+}
+
+//EVENT LISTENER TO RUN 'clearHistory' FUNCTION ON CLICK
+clearBtn.addEventListener('click', clearHistory);
