@@ -48,7 +48,7 @@ function getForecast(lat, lon) {
   .then(function (data) {
     console.log(data)
    });
-}
+};
 
 function getCurrent(lat, lon) {
   var url = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&units=metric";
@@ -63,6 +63,26 @@ function getCurrent(lat, lon) {
    })
 // SHOWS ARRAY OF FETCHED DATA IN CONSOLE
   .then(function (data) {
-    console.log(data)
+    console.log(data);
+    addToHistory(data.name);
    });
+};
+
+function addToHistory(name) {
+  // CREATE LOCAL STORAGE
+  const storageData = JSON.parse(localStorage.getItem("searchHistory"));
+  if (!storageData || storageData.length === 0) {
+    localStorage.setItem("searchHistory", JSON.stringify([name]))
+  } else if (storageData.length > 0 && !storageData.includes(name)) {
+    storageData.push(name);
+    localStorage.setItem("searchHistory", JSON.stringify(storageData))
+  } else {
+    var filteredData = storageData.filter(function(entry){
+           return entry !== name
+    })
+    console.log(filteredData)
+    filteredData.push(name);
+    localStorage.setItem("searchHistory", JSON.stringify(filteredData));
+    
+  }
 }
