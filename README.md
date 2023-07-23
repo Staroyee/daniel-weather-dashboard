@@ -21,7 +21,7 @@ Steps to install this project on your local PC
 1. Open the termal on your machine.
 2. Use the terminal command `cd` to navigate to the directory where we want the repository located.
 3. Locate the 'Code' button on the 'Daniel-weather-dashboard' github repository, click it, then copy the 'HTTPS' link to clipboard. (See image)
-![alt text](images/githubrepo.JPG)
+![alt text](./assets/images/github.JPG)
 4. Use the git command `git clone` followed by the URL copied from Github to clone the repo to our machine.
 5. The `git clone` command creates a new directory with the same name as the repository. We navigate into our new directory using `cd`.
 6. The repository should now be cloned onto your device and able to be edited in VScode or another editing software.
@@ -29,27 +29,24 @@ Steps to install this project on your local PC
 ## Instructions
 
 To use the site:
-1. Enter description into text areas on the calendar.
-2. Press the save button on the corresponding text area.
-3. Press the 'Clear Calendar' button to empty the calendar of descriptions.
-4. View the date at the top of the page.
-5. The colors of each hour section represents whether the hour is in the past, present, or future. (Past = grey | Present = red | Future = green)
+1. Enter the name of a city and press 'search'
+2. View the current weather and 5 day weather forecast
+3. Click on the city named buttons in the search history to re-display that city's weather
 
 ## Deployed Application Link
-* https://staroyee.github.io/Daniel-work-day-scheduler/
+* https://staroyee.github.io/daniel-weather-dashboard/
 
 ## Screenshot
-![alt text](images/webpagepic1.JPG)
-![alt text](images/webpagepic2.JPG)
+![alt text](./assets/images/image1.JPG)
+
 
 ## Credits
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than_or_equal
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript
-* https://day.js.org/docs/en/display/format
-* https://day.js.org/docs/en/display/display
-* https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
-* https://day.js.org/docs/en/get-set/hour
-* https://day.js.org/en/
-* https://meetanshi.com/blog/reload-current-page-without-losing-any-form-data-in-javascript/
-* https://www.javascripttutorial.net/javascript-dom/javascript-siblings/
+* https://stackoverflow.com/questions/67765238/mixed-content-the-page-at-was-loaded-over-https-but-requested-an-insecure-resour
+* https://openweathermap.org/forecast5#geo5
+* https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute
+* https://getbootstrap.com/docs/5.1/getting-started/introduction/
+* https://openweathermap.org/current
+* https://openweathermap.org/api
+* https://openweathermap.org/weather-conditions
+* https://www.javascripttutorial.net/javascript-fetch-api/
+* https://www.geeksforgeeks.org/how-to-use-the-javascript-fetch-api-to-get-data/
