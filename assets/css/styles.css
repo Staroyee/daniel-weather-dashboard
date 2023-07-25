@@ -46,7 +46,10 @@
 }
 
 .historyButton {
-   margin-left: 10px;
+
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 
 .clear {
